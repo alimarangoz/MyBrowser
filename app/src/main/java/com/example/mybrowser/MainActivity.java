@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -16,11 +17,7 @@ public class MainActivity extends AppCompatActivity {
     WebView webview;
     EditText txtAdress;
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu,menu);
-        return super.onCreateOptionsMenu(menu);
-    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +40,33 @@ public class MainActivity extends AppCompatActivity {
                 webview.loadUrl("http://" + txtAdress.getText());
             }
         });
-
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu,menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.btnBack:
+                webview.goBack();
+                return true;
+            case R.id.btnForward:
+                webview.goForward();
+                return true;
+            case R.id.btnHome:
+                webview.loadUrl("http://www.google.com");
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
 
 
 
